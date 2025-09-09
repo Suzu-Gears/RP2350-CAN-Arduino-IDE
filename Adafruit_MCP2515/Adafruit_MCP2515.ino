@@ -1,6 +1,6 @@
 #include <Adafruit_MCP2515.h>
 
-#define XL2515_SPI_PORT spi1
+#define XL2515_SPI_PORT SPI1
 #define XL2515_SCLK_PIN 10
 #define XL2515_MOSI_PIN 11
 #define XL2515_MISO_PIN 12
@@ -10,7 +10,7 @@
 // Set CAN bus baud rate
 #define CAN_BAUDRATE (1000000)
 
-Adafruit_MCP2515 mcp(XL2515_CS_PIN, &SPI1);
+Adafruit_MCP2515 mcp(XL2515_CS_PIN, &XL2515_SPI_PORT);
 
 void setup() {
   Serial.begin(115200);
