@@ -1,8 +1,3 @@
-/*
- * Adafruit MCP2515 FeatherWing CAN Receiver Example
- */
-
-
 #include <Adafruit_MCP2515.h>
 
 #define XL2515_SPI_PORT spi1
@@ -65,12 +60,19 @@ void loop() {
       Serial.println(packetSize);
 
       // only print packet data for non-RTR packets
-      while (mcp.available()) {
-        Serial.print((char)mcp.read());
+      Serial.print("Data: ");
+      uint8_t buf[8];
+      int i = 0;
+      while (mcp.available() && i < 8) {
+        buf[i++] = mcp.read();
+      }
+      for (int j = 0; j < i; j++) {
+        Serial.print("0x");
+        if (buf[j] < 0x10) Serial.print("0");
+        Serial.print(buf[j], HEX);
+        Serial.print(" ");
       }
       Serial.println();
     }
-
-    Serial.println();
   }
 }
